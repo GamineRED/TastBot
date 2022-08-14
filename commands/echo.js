@@ -1,15 +1,11 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('echo')
-        .setDescription('Replies with Pong!')
-        .addStringOption(option =>
-            option.setName('input')
-                .setDescription('The input to echo back')
-                .setRequired(true)),
-                
-    async execute(interaction) {
-        interaction.reply(interaction.options.getString('input'));
-    },
-};
+export const data = new SlashCommandBuilder()
+    .setName('echo')
+    .setDescription('Replies with Pong!')
+    .addStringOption(option => option.setName('input')
+        .setDescription('The input to echo back')
+        .setRequired(true));
+export async function execute(interaction) {
+    interaction.reply(interaction.options.getString('input'));
+}

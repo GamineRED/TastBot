@@ -1,26 +1,24 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageActionRow, MessageButton } = require('discord.js');
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { MessageActionRow, MessageButton } from 'discord.js';
 
-module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('test')
-        .setDescription('Testiftghng command'),
-    async execute(interaction) {
-        const row0 = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('test0')
-                    .setLabel('0')
-                    .setStyle('PRIMARY')
-            );
+export const data = new SlashCommandBuilder()
+    .setName('test')
+    .setDescription('Testiftghng command');
+export async function execute(interaction) {
+    const row0 = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomId('test0')
+                .setLabel('0')
+                .setStyle('PRIMARY')
+        );
 
-        const row1 = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('test1')
-                    .setLabel('1')
-                    .setStyle('SECONDARY')
-            );
-        await interaction.reply({ components: [row0,row1] });
-    },
-};
+    const row1 = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomId('test1')
+                .setLabel('1')
+                .setStyle('SECONDARY')
+        );
+    await interaction.reply({ components: [row0, row1] });
+}

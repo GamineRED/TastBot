@@ -1,19 +1,19 @@
 //依存
-const fs = require('node:fs');
-const path = require('node:path');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./config.json');
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v9';
+import { clientId, guildId, token } from './config.json';
 
 //commandsフォルダの読み込み
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandsPath = join(__dirname, 'commands');
+const commandFiles = readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 //commandファイルを読み込みcommandsに追加
 const guildCommands = [];
 const globalCommands = [];
 for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
+    const filePath = join(commandsPath, file);
     const command = require(filePath);
     if(command.global){
         globalCommands.push(command.data.toJSON());

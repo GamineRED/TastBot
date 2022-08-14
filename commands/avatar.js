@@ -1,11 +1,9 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+import { SlashCommandBuilder } from '@discordjs/builders';
 
-module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('avatar')
-        .setDescription('Replies with your avatar'),
-    global: true,
-    async execute(interaction) {
-        await interaction.reply(interaction.user.avatarURL());
-    },
+export const data = new SlashCommandBuilder()
+    .setName('avatar')
+    .setDescription('Replies with your avatar');
+export const global = true;
+export async function execute(interaction) {
+    await interaction.reply(interaction.user.avatarURL());
 }
