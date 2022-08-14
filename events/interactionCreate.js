@@ -4,7 +4,7 @@ const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
 
 //clientインスタンスの作成
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 //commandsフォルダの読み込み
 const commandsPath = path.join(__dirname, '..\\commands');
@@ -23,9 +23,6 @@ for (const file of commandFiles) {
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        //interactionをログに出すだけ
-        console.log(`${interaction.user.tag}`);
-
         //interactionがcommandだった時の処理
         if (interaction.isCommand()) {
             const command = client.commands.get(interaction.commandName);
@@ -33,20 +30,12 @@ module.exports = {
             if (!command) return;
 
             try {
+                //log表示
+                console.log(`${interaction.user.tag} used ${interaction} command`);
                 await command.execute(interaction);
             } catch (error) {
                 console.error(error);
                 await interaction.reply({ content: 'Sorry\nIt\'s Error', ephemeral: true });
-            }
-        }
-
-        //interactionがbuttonだった時の処理
-        if (interaction.isButton()) {
-            const { customId } = interaction;
-
-            if(customId === 'test0'){
-                await interaction.reply('push button');
-                await interaction.deleteReply();
             }
         }
     }

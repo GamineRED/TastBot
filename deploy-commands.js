@@ -10,22 +10,37 @@ const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 //commandファイルを読み込みcommandsに追加
-const commands = [];
+const guildCommands = [];
+const globalCommands = [];
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
-    commands.push(command.data.toJSON());
+    if(command.global){
+        globalCommands.push(command.data.toJSON());
+    } else {
+        guildCommands.push(command.data.toJSON());
+    }
 }
 
 //(確か)コマンド追加APIのインスタンスを作成
 const rest = new REST({ version: 9 }).setToken(token);
 
-//コマンドのリセット(たぶんできてない)
+//グローバルコマンドのリセット
 rest.put(Routes.applicationCommands(clientId), { body: {} })
     .then(() => console.log('Successfully reset application commands.'))
     .catch(console.error);
 
-//コマンドの追加
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-    .then(() => console.log('Successfully registered application commands.'))
+//ギルドコマンドのリセット
+rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: {} })
+    .then(() => console.log('Successfully reset application guild commands.'))
+    .catch(console.error);
+
+//グローバルコマンドの追加
+rest.put(Routes.applicationCommands(clientId), { body: globalCommands })
+    .then(() => console.log('Successfully registered application commads.'))
+    .catch(console.error);
+
+//ギルドコマンドの追加
+rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommands })
+    .then(() => console.log('Successfully registered application guild commands.'))
     .catch(console.error);

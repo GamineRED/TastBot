@@ -6,6 +6,8 @@ const { token } = require('./config.json');
 
 //clientインスタンスを作成
 const client = new Client({ intents: [
+    //intentsのリスト
+    //https://discord.com/developers/docs/topics/gateway#list-of-intents
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MESSAGES
 ] });
