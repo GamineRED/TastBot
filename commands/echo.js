@@ -10,6 +10,6 @@ module.exports = {
                 .setRequired(true)),
                 
     async execute(interaction) {
-        await interaction.reply({ content: `${interaction.options.getString('input')}` });
+        interaction.reply(interaction.options.getString('input'));
     },
 };
