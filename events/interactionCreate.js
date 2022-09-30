@@ -1,10 +1,10 @@
 //依存
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
 //clientインスタンスの作成
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 //commandsフォルダの読み込み
 const commandsPath = path.join(__dirname, './interactionCreate/commands');

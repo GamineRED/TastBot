@@ -1,14 +1,14 @@
 //依存
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 //clientインスタンスを作成
 const client = new Client({ intents: [
     //intentsのリストhttps://discord.com/developers/docs/topics/gateway#list-of-intents
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages
 ] });
 
 //eventsフォルダの読み込み
