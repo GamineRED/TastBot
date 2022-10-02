@@ -26,8 +26,8 @@ module.exports = {
         //interactionがcommandだった時の処理
         if (interaction.isCommand()) {
             const command = client.commands.get(interaction.commandName);
-            if (!command)
-                return;
+            if (!command) return;
+            
             try {
                 //log表示
                 console.log(`${interaction.user.tag} used ${interaction} command`);

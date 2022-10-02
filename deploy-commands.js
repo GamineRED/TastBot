@@ -22,7 +22,7 @@ for (const file of commandFiles) {
 }
 
 //(確か)コマンド追加APIのインスタンスを作成
-const rest = new REST({ version: 9 }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 //グローバルコマンドのリセット
 rest.put(Routes.applicationCommands(clientId), { body: {} })
