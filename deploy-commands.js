@@ -34,12 +34,12 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: {} })
     .then(() => console.log('Successfully reset application guild commands.'))
     .catch(console.error);
 
-//グローバルコマンドの追加
+//グローバルコマンドのセット
 rest.put(Routes.applicationCommands(clientId), { body: globalCommands })
     .then(() => console.log('Successfully registered application commads.'))
     .catch(console.error);
 
-//ギルドコマンドの追加
+//ギルドコマンドのセット
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommands })
     .then(() => console.log('Successfully registered application guild commands.'))
     .catch(console.error);
