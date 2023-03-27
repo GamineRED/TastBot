@@ -1,7 +1,7 @@
 //依存
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 //clientインスタンスを作成
@@ -19,6 +19,11 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
     const event = require(filePath);
+
+	//初期化関数の実装
+	if (event.init) event.init(client);
+
+	//エベント登録
     if (event.once) {
         client.once(event.name, (...args) => event.execute(...args));
     } else {
