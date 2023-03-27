@@ -8,6 +8,8 @@ module.exports = {
             .setDescription('The input to echo back')
             .setRequired(true)),
     async execute(interaction) {
-        interaction.reply(interaction.options.getString('input'));
+		const content = interaction.options.getString('input');
+
+		await interaction.reply({ content, allowedMentions: { repliedUser: false } });
     }
 };
