@@ -24,16 +24,6 @@ for (const file of commandFiles) {
 //(確か)コマンド追加APIのインスタンスを作成
 const rest = new REST({ version: '10' }).setToken(token);
 
-//グローバルコマンドのリセット
-rest.put(Routes.applicationCommands(clientId), { body: {} })
-    .then(() => console.log('Successfully reset application commands.'))
-    .catch(console.error);
-
-//ギルドコマンドのリセット
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: {} })
-    .then(() => console.log('Successfully reset application guild commands.'))
-    .catch(console.error);
-
 //グローバルコマンドのセット
 rest.put(Routes.applicationCommands(clientId), { body: globalCommands })
     .then(() => console.log('Successfully registered application commads.'))
