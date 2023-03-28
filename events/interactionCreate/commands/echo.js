@@ -10,6 +10,10 @@ module.exports = {
     async execute(interaction) {
 		const content = interaction.options.getString('input');
 
-		await interaction.reply({ content, allowedMentions: { repliedUser: false } });
+		if (content.length <= 2000) {
+			await interaction.reply({ content, allowedMentions: { repliedUser: false } });
+		} else {
+			await interaction.reply({ content: 'メッセージサイズが大きすぎます', ephemeral: true });
+		}
     }
 };
