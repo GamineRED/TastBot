@@ -16,11 +16,11 @@ module.exports = {
 
 		if (!command) return interaction.reply(`There is no command with name '${commandName}'!`);
 
-		delete require.cache[require.resolve(`./${command.data.name}.js`)];
+		delete require.cache[require.resolve(`./${command.data.name}.cjs`)];
 
 		try {
 			interaction.client.commands.delete(command.data.name);
-			const newCommand = require(`./${commandName}.js`);
+			const newCommand = require(`./${commandName}.cjs`);
 			interaction.client.commands.set(newCommand.data.name, newCommand);
 			await interaction.reply(`command '${newCommand.data.name}' was reloaded`);
 		} catch (error) {

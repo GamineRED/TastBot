@@ -1,27 +1,28 @@
 const path = require('node:path');
 const fs = require('node:fs');
-const { Collection, Events } = require('discord.js');
+const { Events } = require('discord.js');
 
-//commandsフォルダの読み込み
-const commandsPath = path.join(__dirname, './interactionCreate/commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cjs'));
+//interactionCreateフォルダの読み込み
+const interactionCreatesPath = path.join(__dirname, './interactionCreate/');
+const interactionCreateFiles = fs.readdirSync(interactionCreatesPath).filter(file => file.endsWith('.cjs'));
 
-//commandファイルの読み込み
-let commands = new Collection();
-for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
+let interactionCreates = [];
+for (const file of interactionCreateFiles) {
+	const filePath = path.join(interactionCreatesPath, file)
+	const interactionCreate = require(filePath);
 
-    commands.set(command.data.name, command);
+	interactionCreates.push(interactionCreate);
 }
 
 //moduleの情報
 module.exports = {
 	type: Events.InteractionCreate,
 	//初期化関数
-	//読み込んだcommandをclientに登録
 	init(client) {
-		client.commands = commands;
+		for (const interactionCreate of interactionCreates) {
+			if (interactionCreate.init) interactionCreate.init(client);
+		}
+		
 		console.log('interactionCreate event initialize completed!');
 	},
 
@@ -29,17 +30,10 @@ module.exports = {
     async execute(interaction) {
         //interactionがcommandだった時の処理
         if (interaction.isCommand()) {
-            const command = commands.get(interaction.commandName);
-            if (!command) return;
-            
-            try {
-                //log表示
-                console.log(`${interaction.user.tag} used ${interaction} command`);
-                await command.execute(interaction);
-            } catch (error) {
-                console.error(error);
-                await interaction.reply({ content: 'Sorry\nIt\'s Error', ephemeral: true });
-            }
+			for (const interactionCreate of interactionCreates) {
+				if (interactionCreate.type != 'command') continue;
+				interactionCreate.execute(interaction);
+			}
         }
     }
 };
