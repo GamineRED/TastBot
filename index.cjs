@@ -1,7 +1,7 @@
 //依存
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 //clientインスタンスを作成
@@ -13,7 +13,7 @@ const client = new Client({ intents: [
 
 //eventsフォルダの読み込み
 const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.cjs'));
 
 //eventファイルの読み込みと実行
 for (const file of eventFiles) {
@@ -25,9 +25,9 @@ for (const file of eventFiles) {
 
 	//エベント登録
     if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args));
+        client.once(event.type, (...args) => event.execute(...args));
     } else {
-        client.on(event.name, (...args) => event.execute(...args));
+        client.on(event.type, (...args) => event.execute(...args));
     }
 }
 

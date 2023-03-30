@@ -1,10 +1,10 @@
 const path = require('node:path');
 const fs = require('node:fs');
-const { Collection } = require('discord.js');
+const { Collection, Events } = require('discord.js');
 
 //commandsフォルダの読み込み
 const commandsPath = path.join(__dirname, './interactionCreate/commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cjs'));
 
 //commandファイルの読み込み
 let commands = new Collection();
@@ -17,7 +17,7 @@ for (const file of commandFiles) {
 
 //moduleの情報
 module.exports = {
-	name: 'interactionCreate',
+	type: Events.InteractionCreate,
 	//初期化関数
 	//読み込んだcommandをclientに登録
 	init(client) {

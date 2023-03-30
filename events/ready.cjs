@@ -1,5 +1,7 @@
+const { Events } = require('discord.js');
+
 module.exports = {
-    name: 'ready',
+    type: Events.ClientReady,
     once: true, //一回だけ
     execute(client) {
         console.log(`Logged in as ${client.user.tag}`);
