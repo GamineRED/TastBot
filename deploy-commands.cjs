@@ -5,8 +5,8 @@ const { REST, Routes } = require('discord.js');
 const { clientId, guildId, token } = require('./config.json');
 
 //commandsフォルダの読み込み
-const commandsPath = path.join(__dirname, 'events/interactionCreate/commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandsPath = path.join(__dirname, 'events/interactionCreate/command');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cjs'));
 
 //commandファイルを読み込みcommandsに追加
 const guildCommands = [];
