@@ -6,12 +6,12 @@ const { Events } = require('discord.js');
 const interactionCreatesPath = path.join(__dirname, './interactionCreate/');
 const interactionCreateFiles = fs.readdirSync(interactionCreatesPath).filter(file => file.endsWith('.cjs'));
 
-let interactionCreates = [];
+const interactionCreates = new Map();
 for (const file of interactionCreateFiles) {
 	const filePath = path.join(interactionCreatesPath, file)
 	const interactionCreate = require(filePath);
 
-	interactionCreates.push(interactionCreate);
+	interactionCreates.set(interactionCreate.type, interactionCreate);
 }
 
 //moduleの情報
@@ -19,7 +19,7 @@ module.exports = {
 	type: Events.InteractionCreate,
 	//初期化関数
 	init(client) {
-		for (const interactionCreate of interactionCreates) {
+		for (const interactionCreate of interactionCreates.values()) {
 			if (interactionCreate.init) interactionCreate.init(client);
 		}
 		
@@ -30,10 +30,7 @@ module.exports = {
     async execute(interaction) {
         //interactionがcommandだった時の処理
         if (interaction.isCommand()) {
-			for (const interactionCreate of interactionCreates) {
-				if (interactionCreate.type != 'command') continue;
-				interactionCreate.execute(interaction);
-			}
+			interactionCreates.get('command').execute(interaction);
         }
     }
 };

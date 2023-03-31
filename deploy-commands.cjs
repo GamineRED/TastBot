@@ -8,7 +8,7 @@ const { clientId, guildId, token } = require('./config.json');
 const commandsPath = path.join(__dirname, 'events/interactionCreate/command');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cjs'));
 
-//commandファイルを読み込みcommandsに追加
+//commandファイルを読み込み各種commandsに追加
 const guildCommands = [];
 const globalCommands = [];
 for (const file of commandFiles) {

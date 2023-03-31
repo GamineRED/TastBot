@@ -22,7 +22,7 @@ module.exports = {
 		client.commands = commands;
 	},
 	async execute(interaction) {
-		const command = commands.get(interaction.commandName);
+		const command = interaction.client.commands.get(interaction.commandName);
 		if (!command) return;
 		
 		try {
