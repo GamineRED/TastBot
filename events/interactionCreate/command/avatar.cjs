@@ -6,6 +6,6 @@ module.exports = {
 		.setDescription('Replies with your avatar'),
 	global: true,
 	async execute(interaction) {
-	await interaction.reply(interaction.user.avatarURL());
+		await interaction.reply(interaction.user.avatarURL());
 	}
 };

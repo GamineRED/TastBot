@@ -4,7 +4,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
-		global: true,
+	global: true,
 	async execute(interaction) {
 		Client_BotPing = Date.now() - interaction.createdTimestamp;
 		DiscordAPI_BotPing = interaction.client.ws.ping;
