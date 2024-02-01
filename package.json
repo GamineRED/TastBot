@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.cjs",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"deploy": "node ./deploy-commands.cjs",
+		"deploy-global": "node ./deploy-commands.cjs global"
 	},
 	"keywords": [],
 	"author": "TASTER",
