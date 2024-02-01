@@ -1,10 +1,10 @@
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('test')
-        .setDescription('Testiftghng command'),
-    async execute(interaction) {
+	data: new SlashCommandBuilder()
+		.setName('test')
+		.setDescription('Testiftghng command'),
+	async execute(interaction) {
 		const exampleEmbed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle('Some title')
@@ -24,5 +24,5 @@ module.exports = {
 			.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 	
 		interaction.reply({ embeds: [exampleEmbed] });
-    }
+	}
 };

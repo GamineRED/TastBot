@@ -27,10 +27,10 @@ module.exports = {
 	},
 
 	//interaction時の実行
-    async execute(interaction) {
-        //interactionがcommandだった時の処理
-        if (interaction.isCommand()) {
+	async execute(interaction) {
+		//interactionがcommandだった時の処理
+		if (interaction.isCommand()) {
 			interactionCreates.get('command').execute(interaction);
-        }
-    }
+		}
+	}
 };

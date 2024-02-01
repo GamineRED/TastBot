@@ -12,13 +12,13 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 const guildCommands = [];
 const globalCommands = [];
 for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    if(command.global){
-        globalCommands.push(command.data.toJSON());
-    } else {
-        guildCommands.push(command.data.toJSON());
-    }
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	if(command.global){
+		globalCommands.push(command.data.toJSON());
+	} else {
+		guildCommands.push(command.data.toJSON());
+	}
 }
 
 //(確か)コマンド追加APIのインスタンスを作成
@@ -26,10 +26,10 @@ const rest = new REST({ version: '10' }).setToken(token);
 
 //グローバルコマンドのセット
 rest.put(Routes.applicationCommands(clientId), { body: globalCommands })
-    .then(() => console.log('Successfully registered application commads.'))
-    .catch(console.error);
+	.then(() => console.log('Successfully registered application commads.'))
+	.catch(console.error);
 
 //ギルドコマンドのセット
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommands })
-    .then(() => console.log('Successfully registered application guild commands.'))
-    .catch(console.error);
+	.then(() => console.log('Successfully registered application guild commands.'))
+	.catch(console.error);

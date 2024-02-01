@@ -1,15 +1,15 @@
 {
-  "name": "tastbot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.cjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "TASTER",
-  "license": "ISC",
-  "dependencies": {
-    "discord.js": "^14.8.0"
-  }
+	"name": "tastbot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.cjs",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "TASTER",
+	"license": "ISC",
+	"dependencies": {
+		"discord.js": "^14.8.0"
+	}
 }
