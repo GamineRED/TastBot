@@ -32,5 +32,9 @@ module.exports = {
 		if (interaction.isCommand()) {
 			interactionCreates.get('command').execute(interaction);
 		}
+
+		if (interaction.isAutocomplete()) {
+			interactionCreates.get('command').autocomplete(interaction);
+		}
 	}
 };

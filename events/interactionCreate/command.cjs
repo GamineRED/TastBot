@@ -20,6 +20,24 @@ module.exports = {
 	init(client) {
 		//読み込んだcommandをclientに登録
 		client.commands = commands;
+
+		for (const command of commands.values()) {
+			try {
+				command.init(client);
+			} catch (error) {
+				console.error('Command init error', error);
+			}
+		}
+	},
+	async autocomplete(interaction) {
+		const command = interaction.client.commands.get(interaction.commandName);
+		if (!command) return;
+
+		try {
+			command.autocomplete(interaction);
+		} catch(error) {
+			console.error(error);
+		}
 	},
 	async execute(interaction) {
 		const command = interaction.client.commands.get(interaction.commandName);

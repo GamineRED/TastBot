@@ -1,5 +1,7 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js');
 
+let commands;
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('reload')
@@ -7,9 +9,20 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('command')
 				.setDescription('The command to reload.')
-				.setRequired(true))
+				.setRequired(true)
+				.setAutocomplete(true))
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
-	
+	init(client) {
+		commands = Array.from(client.commands.keys());
+	},
+	async autocomplete(interaction) {
+		const focusedValue = interaction.options.getFocused();
+		const choices = commands;
+		const filtered = choices.filter(choice => choice.startsWith(focusedValue));
+		await interaction.respond(
+			filtered.map(choice => ({ name: choice, value: choice })),
+		);
+	},
 	async execute(interaction) {
 		const commandName = interaction.options.getString('command', true).toLowerCase();
 		const command = interaction.client.commands.get(commandName);
