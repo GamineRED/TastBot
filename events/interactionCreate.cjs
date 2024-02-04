@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const { Events } = require('discord.js');
 
 //interactionCreateフォルダの読み込み
-const interactionCreatesPath = path.join(__dirname, './interactionCreate/');
+const interactionCreatesPath = path.join(__dirname, './interactionCreates/');
 const interactionCreateFiles = fs.readdirSync(interactionCreatesPath).filter(file => file.endsWith('.cjs'));
 
 const interactionCreates = new Map();

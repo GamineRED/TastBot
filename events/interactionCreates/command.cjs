@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const { Collection } = require('discord.js');
 
 //commandsフォルダの読み込み
-const commandsPath = path.join(__dirname, './command/');
+const commandsPath = path.join(__dirname, './commands/');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cjs'));
 
 //commandファイルの読み込み
