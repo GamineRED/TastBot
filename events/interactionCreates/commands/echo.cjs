@@ -8,9 +8,11 @@ module.exports = {
 			.setDescription('The input to echo back')
 			.setRequired(true)),
 	async execute(interaction) {
-		const content = interaction.options.getString('input');
+		let content = interaction.options.getString('input');
 
 		if (content.length <= 2000) {
+			content = content.replaceAll('\\n', '\n');
+
 			await interaction.reply({ content, allowedMentions: { repliedUser: false } });
 		} else {
 			await interaction.reply({ content: 'Message size is too large', ephemeral: true });
