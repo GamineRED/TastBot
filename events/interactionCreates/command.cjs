@@ -23,7 +23,7 @@ module.exports = {
 
 		for (const command of commands.values()) {
 			try {
-				command.init(client);
+				if (command.init) command.init(client);
 			} catch (error) {
 				console.error('Command init error', error);
 			}
