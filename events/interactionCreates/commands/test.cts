@@ -1,10 +1,11 @@
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+import { CacheType, CommandInteraction, EmbedBuilder, SlashCommandBuilder } from 'discord.js';
+import { TastBotCommand } from './command';
 
-module.exports = {
-	data: new SlashCommandBuilder()
+module.exports = new class implements TastBotCommand {
+	data = new SlashCommandBuilder()
 		.setName('test')
-		.setDescription('Testiftghng command'),
-	async execute(interaction) {
+		.setDescription('Testiftghng command');
+	async execute(interaction: CommandInteraction<CacheType>) {
 		const exampleEmbed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle('Some title')
