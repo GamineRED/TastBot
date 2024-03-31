@@ -1,8 +1,9 @@
 //依存
-const fs = require('node:fs');
-const path = require('node:path');
-const { Client, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
+import fs from 'node:fs';
+import path from 'node:path';
+import { Client, GatewayIntentBits } from 'discord.js';
+import { token } from './config.json';
+import { TastBotEvent } from './events/event';
 
 //clientインスタンスを作成
 const client = new Client({ intents: [
@@ -13,12 +14,12 @@ const client = new Client({ intents: [
 
 //eventsフォルダの読み込み
 const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.cjs'));
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.cts'));
 
 //eventファイルの読み込みと実行
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
+	const event = require(filePath) as TastBotEvent;
 
 	//初期化関数の実装
 	if (event.init) event.init(client);
