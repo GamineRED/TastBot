@@ -1,12 +1,12 @@
 //依存
-const fs = require('node:fs');
-const path = require('node:path');
-const { REST, Routes } = require('discord.js');
-const { clientID, guildID, token } = require('./config.json');
+import fs from 'node:fs';
+import path from 'node:path';
+import { REST, Routes } from 'discord.js';
+import { clientID, guildID, token } from './config.json';
 
 //commandsフォルダの読み込み
-const commandsPath = path.join(__dirname, 'events/interactionCreate/command');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cjs'));
+const commandsPath = path.join(__dirname, 'events/interactionCreates/commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.cts'));
 
 //commandファイルを読み込み各種commandsに追加
 const globalCommands = [];
