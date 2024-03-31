@@ -2,15 +2,23 @@
 	"name": "tastbot",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.cjs",
 	"scripts": {
-		"deploy": "node ./deploy-commands.cjs",
-		"deploy-global": "node ./deploy-commands.cjs global"
+		"start": "npx ts-node ./index.cts",
+		"deploy": "npx ts-node ./deploy-commands.cts",
+		"deploy-global": "npx ts-node ./deploy-commands.cts global",
+
+		"lint": "npx eslint ."
 	},
 	"keywords": [],
 	"author": "TASTER",
 	"license": "ISC",
 	"dependencies": {
-		"discord.js": "^14.12.1"
+		"discord.js": "^14.14.1"
+	},
+	"devDependencies": {
+		"typescript": "^5.4.3",
+		"ts-node": "^10.9.2",
+		"eslint": "^8.57.0",
+		"typescript-eslint": "^7.4.0"
 	}
 }
